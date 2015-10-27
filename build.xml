@@ -1,0 +1,182 @@
+<project name="JavaNNS" default="javanns" basedir=".">
+	<description>
+		JavaNNS Ant-file
+	</description>
+	
+	<!-- global parameters -->
+	<property name="directories.build" 		location="."/>
+	<property name="directories.dist" 		location="dist"/>
+	<property name="directories.kiPrecompiled" 	location="KernelInterface/precompiled"/>	
+	<property name="files.platform" 		location="target.def"/>
+	<!--Filenames of the precompiled kernel interfaces-->
+	<property name="files.kiLinux" 			location="${directories.kiPrecompiled}/Linux/libSNNS_jkr.so"/>
+	<property name="files.kiWindows"		location="${directories.kiPrecompiled}/Windows/SNNS_jkr.dll"/>
+	<property name="files.kiSolaris"		location="${directories.kiPrecompiled}/Solaris/libSNNS_jkr.so"/>
+	<property name="files.kiMac"			location="${directories.kiPrecompiled}/Mac/libSNNS_jkr.jnilib"/>
+
+	<!--Initialization target-->
+	<target name="init">
+		<tstamp/>
+		<!--mkdir dir="${directories.build}"/-->
+		<mkdir dir="${directories.dist}"/>
+		<!--Check whether platform.def is available-->
+		<available file="${files.platform}" property="platform.propertyfile"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<!--Dependency checking-->
+		<depend srcdir="${basedir}" destdir="${directories.build}">
+			<include name="**/*.java"/>
+		</depend>
+		<!--Compile sources-->
+		<javac srcdir="${basedir}" destdir="${directories.build}" debug="yes">
+			<include name="javanns/**.java"/>
+			<include name="wsi/**.java"/>
+			<classpath>
+				<dirset dir="${directories.build}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="selectplatform" unless="platform.propertyfile" depends="init"> 
+		<!--Allows the user to change the target platform-->
+		<input validargs="1,2,3,4,c" addproperty="input.platform"
+                message="No platform setting could be found. ${line.separator}
+		Please select the desired target platform: ${line.separator}
+		1) Windows ${line.separator}
+		2) Solaris ${line.separator}
+		3) Linux ${line.separator}
+		4) Mac ${line.separator}
+		c) Cancel build process"/>
+			<condition property="platform.name" value="Windows">
+				<equals arg1="${input.platform}" arg2="1"/>
+			</condition>
+			<condition property="platform.name" value="Linux">
+				<equals arg1="${input.platform}" arg2="3"/>
+			</condition>
+			<condition property="platform.name" value="Solaris">
+				<equals arg1="${input.platform}" arg2="2"/>
+			</condition>
+			<condition property="platform.name" value="Mac">
+				<equals arg1="${input.platform}" arg2="4"/>
+			</condition>
+			<condition property="do.abort">
+				<equals arg1="${input.platform}" arg2="c"/>
+			</condition>
+			<fail if="do.abort"/>
+		<!--Write new target platform to target.def-->	
+		<echo file="${files.platform}" message="platform.name=${platform.name}"/>
+	</target>
+	
+	<target name="loaddefplatform" if="platform.propertyfile" depends="init">
+		<!-- Load defualt target platform from file target.def-->
+		<loadproperties srcFile="${files.platform}"/>
+	</target>
+
+	<target name="settarget">
+		<!--Delete target.def and have the user select a new target-->
+		<delete file="${files.platform}"/>
+		<antcall target="selectplatform" inheritAll="false"/>
+	</target>
+	
+	<target name="kernelinterface" depends="init, loaddefplatform, selectplatform">
+		<!--Set path to KernelInterface according to the currently selected platform-->
+		<condition property="files.ki" value="${files.kiWindows}">
+			<equals arg1="${platform.name}" arg2="Windows"/>
+		</condition>
+		<condition property="files.ki" value="${files.kiLinux}">
+			<equals arg1="${platform.name}" arg2="Linux"/>
+		</condition>
+		<condition property="files.ki" value="${files.kiSolaris}">
+			<equals arg1="${platform.name}" arg2="Solaris"/>
+		</condition>
+		<condition property="files.ki" value="${files.kiMac}">
+			<equals arg1="${platform.name}" arg2="Mac"/>
+		</condition>
+		<condition property="files.ki" value="${files.kiWindows}">
+			<equals arg1="${platform.name}" arg2="Windows"/>
+		</condition>
+		<echo>
+			Compiling for target platform ${platform.name}
+			Using KernelInterface ${files.ki}
+		</echo>
+	</target>
+
+	<target name="javanns" depends="init,compile,kernelinterface">
+		<!--Delete kernelinterface in project root-->
+		<delete>
+			<fileset dir="." includes="libSNNS*.*"/>
+			<fileset file="SNNS_jkr.dll"/>
+		</delete>
+		<!--Copy kernel interface for the current platform to the procect root-->
+		<copy todir=".">
+			<fileset file="${files.ki}"/>
+		</copy>
+	</target>
+	
+	<target name="jar" depends="init,compile,kernelinterface">
+		<jar 	destfile="${directories.dist}/JavaNNS.jar" 
+			manifest="JavaNNS.mf">
+			<fileset dir="${directories.build}" includes="javanns/**.class"/>
+			<fileset dir="${directories.build}" includes="wsi/**/*.class"/>
+			<fileset dir="." includes="images/**.gif"/>
+			<fileset dir="." includes="images/**.png"/>
+			<fileset file="JavaNNSindex.html"/>
+			<fileset file="FnDeclaration.txt"/>
+			<fileset file="Default.properties"/>
+			<fileset file="import.properties"/>
+			<fileset file="${files.ki}"/>
+		</jar>
+	</target>
+
+	<target name="debug" depends="javanns">
+		<fail unless="netbeans.home">Call this target only from within the NetBeans IDE</fail>
+		<nbjpdastart name="JavaNNS" addressproperty="jpda.address" transport = "dt_socket">
+			<classpath path="."/>
+		</nbjpdastart>
+		<java fork="true" classname="javanns.Snns">
+			<jvmarg value="-Xdebug"/>
+			<jvmarg value="-Xnoagent"/>
+			<jvmarg value="-Djava.compile=none"/>
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
+			<classpath path="."/>
+		</java>
+	</target>
+
+	<target name="run" depends="compile">
+		<java fork="true" classname="javanns.Snns"/>
+	</target>
+	
+	<target name="clean" depends="init">
+		<delete>
+			<fileset dir="." includes="**/*.class"/>
+		</delete>
+		<!--delete dir="${directories.build}"/-->
+	</target>
+
+	<target name="help">
+	<echo>
+        -----------------------------------------------------------------------------
+                                           JavaNNS v1.1
+        -----------------------------------------------------------------------------
+
+        This Ant project supports the following targets:
+	
+        javanns [default] -  Compiles JavaNNS and asks for the target platform,
+                             if it has not been set before
+
+        jar               -  Compiles JavaNNS and packages all necessary components
+                             into a JAR file (dist/JavaNNS.jar)
+
+        run               -  Compiles JavaNNS (if necessary) and executes JavaNNS
+
+        settarget         -  This target allows you to change the target platform
+                             (Windows, Linux, Mac, Solaris)
+
+        clean             -  Deletes all intermediary .class files. Please note that
+                             the dist directory won't be removed
+
+        help              -  Displays this help text
+	</echo>
+	</target>
+</project>

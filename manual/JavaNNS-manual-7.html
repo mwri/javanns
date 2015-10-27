@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<TITLE> 7.	Training and Pruning Networks</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1 CLASS="Heading1">
+<A NAME="pgfId-998302"></A>Training and Pruning Networks</H1>
+<P CLASS="Body">
+<A NAME="pgfId-998303"></A>Training is also performed through the Control Panel. In the Initializing tab, an initialization function and its parameters can be set. The Init button (also available in the Learning tab) performs the initialization.
+<DIV>
+<IMG SRC="images/ControlPanel1.gif">
+<P CLASS="Figure">
+<small>Figure 8: Control Panel - Init</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-998304"></A>Under the Learning tab, the user can choose the learning function, set its parameters, number of learning cycles and update steps and finally perform network initialization and learning. The classic Backpropagation (equals Std_Backpropagation in SNNS) is the default learning function. For each learning function default parameters are provided.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1000316"></A>The &quot;Learn current&quot; button performs training with the currently selected pattern and &quot;Learn all&quot; with all patterns from the pattern set. In order to monitor learning progress, it is useful to open the Error Graph and/or Log window, both available from the View menu. During learning, the error graph displays the error curve. The type of the error to be drawn is set through the middle button located on the left edge of the window. The arrow buttons near the axes are used for scaling. The two buttons in the left bottom corner clear the error graph and toggle grid, respectively.
+<DIV>
+<IMG SRC="images/ControlPanel3.gif">
+<P CLASS="Figure">
+<small>Figure 9: Control Panel - Learning</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1000320"></A>During training, the error is also written into the log window. Also, many other useful information about the network are written there on diverse occasions. The log window corresponds roughly to the command shell window from which SNNS is started in a Unix system.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998307"></A>
+<DIV>
+<IMG SRC="images/ControlPanel5.gif">
+<P CLASS="Figure">
+<small>Figure 10: Control Panel - Pruning</small></P>
+</DIV>
+Options and controls for pruning networks are found under the Pruning tab in the Control Panel. Its contents corresponds mostly to the Pruning window in SNNS. However, contrary to the SNNS, the user does not have to set the learning function to PruningFeedForward. In JavaNNS it is done automatically and transparently for him/her. The learning function, as set under the Learning tab, as well as number of cycles, correspond to the data entered in &quot;General parameters for Training&quot; section of the SNNS' Pruning window. In JavaNNS, pruning is performed by pressing the Prune button.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998308"></A>Cascade correlation and TACOMA learning are the only exceptions to the concept of the Control Panel being the central place for manipulating networks. Because of the large number of parameters needed by the two learning methods, a separate window, accessible from the Tools menu is used. Contrary to SNNS, where parameters for cascade correlation and TACOMA are dispersed between the Control Panel and the Cascade window, in JavaNNS the Cascade window alone covers all data and parameters needed for applying the two learning algorithms.
+<DIV>
+<IMG SRC="images/CasCorr1.gif">
+<P CLASS="Figure">
+<small>Figure 11: Cascade Correlation and TACOMA - General</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-998309"></A>The window is divided into six tabs. Tabs &quot;General&quot;, &quot;Modification&quot; and &quot;Learn&quot; cover the parameters set in SNNS in the section &quot;General Parameters for Cascade&quot; of the Cascade window. Under the &quot;Lear&quot; tab of the JavaNNS Cascade window, the learning function, together with its parameters and the maximal number of cascades (hidden units generated during learning) are set. The &quot;Init&quot; tab is introduced for convenience and provides for initializing network. Tabs &quot;Candidates&quot; and &quot;Output&quot; correspond to &quot;Parameters for Candidate Units&quot; and &quot;Parameters for Output Units&quot; sections in the SNNS window. The default learning method invoked from the window is cascade correlation, TACOMA can be set as a modification under the corresponding tab.
+<DIV>
+<IMG SRC="images/CasCorr6.gif">
+<P CLASS="Figure">
+<small>Figure 12: Cascade Correlation and TACOMA - Learning</small></P>
+</DIV>
+</BODY>
+</HTML>

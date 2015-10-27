@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<TITLE> 4.	A Quick Tour of JavaNNS</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1 CLASS="Heading1">
+<A NAME="pgfId-1026251"></A>A Quick Tour of JavaNNS</H1>
+<P CLASS="Body">
+<A NAME="pgfId-1015723"></A>JavaNNS is a simulator for artificial neural networks, i.e. computational models inspired by biological neural networks. It enables you to use predefined networks or create your own, to train and to analyze them. If any of these terms is unknown to you, please refer to a book about neural networks or to the SNNS User Manual - this manual describes only the usage of JavaNNS.</P>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-1015724"></A>Starting JavaNNS</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015813"></A>To begin the tour, let's start JavaNNS, as described in &quot;Installing&quot;: type java -jar JavaNNS.jar or, if using Windows, click the JavaNNS.bat file. After starting the program, its main window opens. As we have started the program no parameters in the command line, the window is empty, containing only the usual menu bar. Also, no network files have been loaded.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-1015814"></A>Loading Files</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015815"></A>Use File/Open menu to open an example file: navigate to the examples directory and open the files xor_untrained.net, and xor.pat - a simple network and a corresponding pattern file.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-1015816"></A>View Network</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015817"></A>The main window still remains empty, so choose View/Network to display the network. You should see a new window appearing, schematically showing a network, consisting of 4 units (neurons) and links between them, in its main part. Neurons and links have different colors, representing different values of unit activations and link weights. The colored bar on the left edge of the window shows which color corresponds to which value and can be used as reminder. The colors - and appearance in general - can be adjusted through View/Display Settings, which corresponds to the Display/Setup window in SNNS.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998264"></A>Training Network</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1016060"></A>Let us now train the network - reprogram its weights, so that it gives the desired output when presented an input pattern. For that purpose, open the Control Panel in the Tools menu. The Control Panel is, as in the SNNS, the most important window in the simulator, because almost all modifications and manipulations of the network are done through it. We shall also open the Error Graph window, in order to watch the training progress. Finally, to receive some textual and numerical information, we can open the Log window. Both are accessible through the View menu.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1016068"></A>A sample screen shot with the windows open is shown in <A HREF="#36304" CLASS="XRef">Figure 1</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1016069"></A>The Control Panel is, contrary to the one in SNNS, divided into six tabs, each containing controls for specific purpose. For this introduction, let us switch directly to the learning tab. Here, the user can choose the learning function, set its parameters, number of learning cycles and update steps and finally perform network initialization and learning. The classic Backpropagation (equals Std_Backpropagation in SNNS) is the default learning function. As you can see, for each learning function default parameters are provided.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998432"></A>Learning is performed by pressing one of the buttons: &quot;Learn current&quot; which performs training with the currently selected pattern, and &quot;Learn all&quot;, which trains the network with all patterns from the pattern set. During learning, the error graph displays the error curve - the type of error to be drawn is set on the left edge of the window. The error is also written into the log window.</P>
+</DIV>
+<DIV>
+<A NAME="36304"></A><a href="images/JavaNNS-full.gif"><IMG SRC="images/JavaNNS-full.gif" width="500"></a>
+<P CLASS="Figure">
+<small>Figure 1: JavaNNS with XOR network, error graph, control and log panel (click the image to view it at its natural size)</small></P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998268"></A>Analyzing Network</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015819"></A>For analyzing the network and its performance, tools like Analyzer (in the Tools menu) and Projection (in the View menu), already familiar to SNNS users, can be used. For Projection, two input units and a hidden or output unit have to be selected in order for the menu item to become enabled. The Projection Panel than displays the activation of the hidden or output unit as a function of the two inputs. The activation is represented by color, so a colored rectangle is obtained. Analyzer is used to show output or activation of a unit as a function of other unit's activation or of the input pattern. Its usage is similar to the Analyze panel in the SNNS.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998269"></A>Creating a Network</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015820"></A>Now let's create a network of our own. Choose File/New to remove the current network from the simulator. Then, choose Create/Layers from the Tools menu. A window resembling the Bignet tool of SNNS appears. Choose width and height &quot;1&quot;, unit type &quot;Input&quot; and click &quot;Create&quot; to create a new layer. For the next layer, set height to five and the unit type to &quot;Hidden&quot; and click &quot;Create&quot; again. Finally, create the output layer with the height of one and unit type &quot;Output&quot; and close the window. To connect the created units, use Create/Connections from the Tools menu. Simply choose &quot;Connect feed-forward&quot; and click &quot;Connect&quot;. Doing that, you have created a simple feed-forward neural network, with one input, five hidden and one output unit. You can now close the Connections window, too.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998270"></A>Graphical Network Display</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015825"></A>You can arrange units on the display manually, by clicking and dragging them with the mouse. In fact, clicking a unit selects it, and dragging moves all selected units. To deselect a unit, press the CTRL-Key on the keyboard and click it while still holding the key pressed. Using View/View Settings, tab Units and Links, you can choose what to display above and under each unit. Make sure that &quot;Name&quot; is selected as top label. Since the units have just been created, they are all called &quot;noName&quot;. To change the names, choose &quot;Names&quot; from the Edit menu. The top labels turn to text fields. Use the mouse to place the caret into each one and enter some names. After you have finished, press &quot;Enter&quot; or click in an empty are of the display to turn the text fields to labels again.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-1015826"></A>Training and Validation Pattern Sets</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1015827"></A>To see how two pattern sets can be used for training and validation, load two pattern sets from &quot;examples&quot; directory: trainMAP.pat and validMAP.pat. In the Control Panel, tab &quot;Patterns&quot;, select trainMap as the training set and validMAP as the validation set. Switch back to the &quot;Learning&quot; tab and train the network. During training two curves are displayed in the Error Graph: one, who's color depends on the number of already displayed curves and which represents the error of the training set, and the other, pink one, which represents the error of the validation set. The validation set is normally used to avoid overtraining of a network. For more information refer to the SNNS User Manual and other neural networks literature.</P>
+</DIV>
+</BODY>
+</HTML>

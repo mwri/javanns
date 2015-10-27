@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>SNNS applet</title>
+<body>
+<OBJECT classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+    WIDTH = 100
+    HEIGHT = 20
+    codebase="http://java.sun.com/products/plugin/1.2.2/jinstall-1_2_2-win.cab#Version=1,2,2,0"
+  >
+  <PARAM NAME = CODE VALUE = SnnsApplet >
+  <PARAM NAME = ARCHIVE VALUE = JavaNNS.jar >
+  <PARAM NAME = network VALUE = "examples\\xor_untrained.net" >
+  <PARAM NAME = pattern VALUE = "examples\\xor.pat" >
+  <PARAM NAME = configuration VALUE = "examples\\xor.cfg" >
+  <PARAM NAME="type" VALUE="application/x-java-applet;version=1.2.2">
+
+  <COMMENT>
+    <EMBED
+      type="application/x-java-applet;version=1.2.2"
+      CODE = "SnnsApplet"
+      ARCHIVE = "JavaNNS.jar"
+      WIDTH = 100
+      HEIGHT = 20
+      network = "examples\\xor_untrained.net"
+      pattern = "examples\\xor.pat"
+      configuration = "examples\\xor.cfg"
+      pluginspage="http://java.sun.com/products/plugin/1.2.2/plugin-install.html"
+    >
+      <NOEMBED>
+        </COMMENT>
+          alt="Your browser understands the &lt;APPLET&gt; tag but isn't running the applet, for some reason."
+	        Your browser is completely ignoring the &lt;APPLET&gt; tag!
+      </NOEMBED>
+    </EMBED>
+</OBJECT>
+</body>
+</html>

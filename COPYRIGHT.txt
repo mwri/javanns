@@ -1,0 +1,4 @@
+This program is copyrighted.
+
+Copyright (c) 1990-1995 IPVR, University of Stuttgart
+Copyright (c) 1996-2005 WSI, University of Tübingen

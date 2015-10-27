@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<TITLE> 5.	Network Creation and Editing</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1 CLASS="Heading1">
+<A NAME="pgfId-998273"></A>Network Creation and Editing</H1>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998274"></A>Network View and Display Settings</H3>
+<P CLASS="Body">
+<A NAME="pgfId-998275"></A>Although not necessary, it is recommended that a network view is open when creating and editing networks. Network view is opened through View/Network menu. The network view displays a visual representation of the network, which comprises of units and connections (links) between them. Units are drawn as colored squares with 16 pixels side length, and connections as colored lines. For both units and links the color represents a value: activation for units and weight for links. The colored bar on the left edge of the network view serves as a quick reminder for color-to-value correspondence. (<A HREF="#86545" CLASS="XRef">Figure 2</A>)
+</P>
+<DIV>
+<A NAME="86545"></A><IMG SRC="images/Network.gif">
+<P CLASS="Figure">
+<small>Figure 2: Network view</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1000223"></A>Units are placed along an invisible grid in the network view. Optionally, above and below each unit diverse unit properties can be displayed. Which ones, as well as grid size, chroma coding for units and links and some more data are set in the Display Settings panel, accessible from the View menu. This panel corresponds to the Display/Setup panel in SNNS.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1015863"></A>Display Settings comprise of two tabs: General and Units&amp;Links (or SOM for Kohonen tool). In tab General, grid size (in pixels), subnet number and chroma codes for different values can be set. In Units&amp;Links, the user can set which properties, like name, unit activation etc. are to be shown above (Top label) and below (Base label) of each unit. Also, the user can decide if the connections are to be shown, if their weights are to be displayed numerically and if the direction arrows should be drawn. Sliders &quot;Maximum expected value&quot; and &quot;Maximum expected weight&quot; control the chroma coding for units and links, since they determine which value corresponds to the full color, as set in the &quot;General&quot; tab. Minimum values are simply taken to be negatives of the maximums, and for values between the color is interpolated. The Slider &quot;Weakest visible link&quot; is self-explanatory and helps keeping the network view more comprehensible.
+</P>
+<DIV>
+<IMG SRC="images/NetSettings1.gif">
+<P CLASS="Figure">
+<small>Figure 3: Display Settings - General</small></P>
+</DIV>
+<DIV>
+<IMG SRC="images/NetSettings2.gif">
+<P CLASS="Figure">
+<small>Figure 4: Display Settings - Units and Links</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1015870"></A>Since more than one network view can be open at the same time, Display Settings refer to the currently selected one.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-998280"></A>Tools for Creating Networks</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1000258"></A>Networks are created using two tools from the &quot;Tools&quot; menu, both from the &quot;Create&quot; submenu: &quot;Layers&quot; and &quot;Connections&quot;. They together correspond to the &quot;Bignet&quot; tool in SNNS.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1000259"></A>In JavaNNS layer has a different meaning as in the SNNS. In JavaNNS, layer corresponds to a physical layer of units that is being created. When creating layers, width and height determine the number of units in horizontal and vertical direction for the layer. Top left position is updated automatically, but can also be entered manually, and controls the layer's position in the display area. For all the data - width, height and coordinates of the top left position - the measuring unit is &quot;grid size unit&quot;, which is set in the View/Display Settings panel.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998283"></A>In &quot;Unit detail&quot; segment of the window, the unit type (e.g. Input or Hidden), activation function of the units (Logistic by default), output function of the units (Identity by default), the layer number and the subnet number are set.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998284"></A>The &quot;Connections&quot; window provides for creating links (connections) between units. Three different ways are possible for creating links: by manually selecting units to connect (&quot;Connect selected units&quot;), by automatically connecting the whole network in a feed-forward style (&quot;Connect feed-forward&quot;) and by interconnecting those in the same layer (Auto-associative). In case of feed-forward networks, shortcut connections (links connecting units form non-adjacent layers) can optionally be created. For auto-associative networks, self-connections (feedback connections from the output to the input of a same unit) can be allowed.
+<DIV>
+<IMG SRC="images/CreateLayers.gif">
+<P CLASS="Figure">
+<small>Figure 5: Create Layers tool</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1002239"></A>Except for automatic generation of feed-forward connections, the user has to select units to be connected. Units are selected using the mouse, either by clicking each unit, or by clicking the mouse and dragging a rectangle around units to be selected. Units are deselected by clicking them while holding the CTRL key pressed. A simple click in an empty area in a network view deselects all units.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1002250"></A>Connecting selected units is a two-step process. In the first step, the user selects units where the connections are to originate (source units) and presses the button &quot;Mark selected units as source&quot;. In the second step, the user selects the receiving units (targets) and presses the button, which is now labeled &quot;Connect source with selected units&quot;. For auto-associative connections it suffices to select the desired units and press the &quot;Connect selected units&quot; button.
+<DIV>
+<IMG SRC="images/CreateLinks.gif">
+<P CLASS="Figure">
+<small>Figure 6: Create Links tool</small></P>
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1002251"></A>Selected units can be dragged with the mouse in order to change their positions.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Heading2">
+<A NAME="pgfId-1002252"></A>Editing Units</H3>
+<P CLASS="Body">
+<A NAME="pgfId-998290"></A>Existing units can be edited by selecting them and then choosing Unit Properties from the Edit menu or Edit Units in the context-sensitive menu, which is accessed by pressing the right mouse button while over a unit. An extra window appears, displaying all editable unit properties, like name, type, activation etc. This method allows only for setting the same values for all selected units. Alternatively, the user can edit values displayed as top and base labels of each unit individually. For that purpose, the user has to choose from the Edit menu which property he or she wants to edit. The labels displaying the property turn to entry fields, which can now be edited. The fields are selected by the mouse and can be traversed by pressing the Tab key. Pressing Enter accepts changes and turns the fields back to labels.</P>
+<P CLASS="Body">
+<A NAME="pgfId-998291"></A>Changing activation values of units is useful if patterns are created manually.</P>
+</DIV>
+</BODY>
+</HTML>

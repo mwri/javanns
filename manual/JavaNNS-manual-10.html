@@ -1,0 +1,700 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<TITLE> Appendix A:	Kernel File Interface</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1 CLASS="Appendix1First">
+<A NAME="pgfId-1027815"></A>Kernel File Interface</H1>
+<DIV>
+<H3 CLASS="Appendix2">
+<A NAME="pgfId-1027841"></A>The ASCII Network File Format</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1027875"></A>The ASCII representation of a network consists of the following parts:</P>
+<UL>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027881"></A> a header, which contains information about the net</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027889"></A> the definition of the teaching function</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027894"></A> the definition of the sites</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027899"></A>  the definition of cell types</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027904"></A> the definition of the default values for cells</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027909"></A> the enumeration of the cells with all their characteristics</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027914"></A> the list of connections</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027919"></A> a list of subnet numbers</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1027924"></A> a list of layer numbers</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1028140"></A>All parts, except the header and the enumeration of the cells, may be omitted. Each part may also be empty. It then consists only of the part title, the header line and the boarder marks (e.g.: ----|---|------).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1027961"></A>Entries in the  site definition section do not contain any empty columns. The only empty column in the type definition section may be the sites column, in which case the cells of this type do not have sites. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1027985"></A>Entries in the unit definition section have at least the columns no. (cell number) and position filled. The entries (rows) are sorted by increasing cell number. If column typeName is filled, the columns act func,  out func, and  sites remain empty.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028030"></A>Entries in the connection definition section have all columns filled. The respective cell does not have a site, if the column site is empty. The entries are sorted by increasing number of the target cell (column target). Each entry may have multiple entries in the column sources. In this case, the entries (number of the source cell and the connection strength) are separated by a comma and a blank, or by a comma and a newline (see example in the Appendix B).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1034875"></A>The file may contain comment lines. Each line beginning with # is skipped by the SNNS-kernel.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix2">
+<A NAME="pgfId-1034876"></A>Form of the Network File Eries</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1034877"></A>Columns are separated by the string &quot; &quot; (without &quot;) . A row never exceeds 250 characters. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1028158"></A>Strings may have arbitrary length. The compiler determines the length of each row containing strings (maximum string length + 2). Within the columns, the strings are stored left adjusted. Strings may not contain blanks, but all special characters except |. The first character of a string has to be a letter.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028184"></A>Integers may have an arbitrary number of digits. Cell numbers arealways positive and not zero. Position coordinates may be positive or negative. The compiler determines the length of each row containing integers (maximum digit number + 2). Within the columns, the numbers are stored right adjusted.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028201"></A>Floats are always stored in fixed length with the format Vx.yyyyy, where  V is the sign (+, - or blank),  x is 0 or 1 and y is the rational part (5 digits behind the decimal point).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028226"></A>Rows containing floats are therefore always 10 characters long (8 + 1 blank on each side).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028234"></A>If a row contains several sites in the type or unit definition section, they are wri ten below each other. They are separated in the following way: Directly after the first site fo lows a comma and a newline &#92;n. The next line starts with an arbitrary number of blanks or tabs in front of the next site.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1028257"></A>The source of a connection is described by a pair, the cell number and the strength of the connection. It always has the format nnn:Vx.yyyyy with the following meaning:</P>
+<UL>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028271"></A> nnn Number of the source</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028276"></A> Vx.yyyyy Strength of the connection as a float value (format as discribed above)</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1028332"></A>The compiler determines the width of the column nnn by the highest cell number present. The cell numbers are written into the column right adjusted (according to the rules for integers). The column Vx.yyyyy has fixed width. Several source pairs in an entry to the connection definition section/ are separated by a comma and a blank. If the list of source pairs exceeds the length of one line, the line has to be parted after the following rule:</P>
+<UL>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028368"></A> Separation is always between pairs, never within them.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1034590"></A> The comma between pairs is always directly behind the last pair,i.e. remains in the old line.  </LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1034591"></A> After a newline (&#92;n) an arbitrary number of blanks or tabs may precede the  next pair.</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix2">
+<A NAME="pgfId-1034592"></A>Grammar of the Network Files</H3>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix3">
+<A NAME="pgfId-1028613"></A>Conventions</H3>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix4">
+<A NAME="pgfId-1028649"></A> Lexical Elements of the Grammar</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1028684"></A>The lexical elements of the grammar which defines network files are listed as regular expresions. The first column lists the name of the symbol, the second the regular expresion defining it. The third column may contain comments.</P>
+<UL>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028701"></A> All terminals (characters) are put between &quot;. . .&quot;.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028709"></A> Elements of sets are put between square brackets. Within the brackets, the characters represent themselves (even without &quot;, and - defines a range of values. The class of digits is defined, e.g. as [&quot;0&quot;-&quot;9&quot;].</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028723"></A> Characters can be combined into groups with parenteses ().</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028728"></A> x* means, that the character or group x can occur zero or more times.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028736"></A> x+  means, that the character or group x must occur at least once, but may occur several times.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028742"></A> x? means, that x can be omitted.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028747"></A> x{n} means, that x has to occur exactly n times.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028752"></A> x|y means, that either x or y has to occur.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028759"></A> *, + and {} bind</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028757"></A> strongest, ? is second, | binds weakest.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028765"></A> Groups or classes of characters are treated like a single character with respect to priority.</LI>
+</UL>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix4">
+<A NAME="pgfId-1028837"></A>Definition of the Grammar</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1028844"></A>The Grammar defining the interface is listed in a special form of EBNF.</P>
+<UL>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028849"></A> Parts between square brackets [] are facultative.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028863"></A> | separates alternatives (like with terminal symbols).</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028868"></A> {x} means, that x may occur zero or more times.</LI>
+<LI CLASS="Bulleted">
+<A NAME="pgfId-1028875"></A> CSTRING is everything that is recognized as string by the C programming language.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1029346"></A>&nbsp;</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix3">
+<A NAME="pgfId-1028893"></A>Terminal Symbols</H3>
+<P CLASS="Body2">
+<A NAME="pgfId-1029382"></A>WHITESPACE 	{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;}                     /* whitespaces */                       </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029383"></A>BLANKS_TABS	{&quot; &quot;|&quot;&#92;t&quot;}                          /* only blanks or tabs */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029384"></A>W_COL_SEP 	 (&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;) {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} &quot;|&quot; {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029385"></A>	/* at least one blank and the column separation */ </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029386"></A>COL_SEP	{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} &quot;|&quot; {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;}  /* column separation */ </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029387"></A>COMMA 	{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} &quot;,&quot; {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;}  /* at least the comma */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029388"></A>EOL 	{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} &quot;&#92;n&quot; {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} /* at least &quot;&#92;n&quot; */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029389"></A>CUT 	{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} (&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;) {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029390"></A>	/* at least a blank, &quot;&#92;t&quot;, or &quot;&#92;n&quot; */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029391"></A>COLON 	 &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029392"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029393"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029394"></A>/* separation lines for different tables */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029395"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029396"></A>TWO_COLUMN_LINE 	&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029397"></A>THREE_COLUMN_LINE 	 	&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029398"></A>FOUR_COLUMN_LINE 	 &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029399"></A>SIX_COLUMN_LINE 	 &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029400"></A>SEVEN_COLUMN_LINE  	 &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029401"></A>TEN_COLUMN_LINE  	 &quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029402"></A>	 &quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+&quot;|&quot;&quot;-&quot;+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029403"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029404"></A>COMMENT  	{{&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;} &quot;#&quot; CSTRING &quot;&#92;n&quot; {&quot; &quot;|&quot;&#92;n&quot;|&quot;&#92;t&quot;}} </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029405"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029406"></A>VERSION 	&quot;V1.4-3D&quot; | &quot;V2.1&quot; | &quot;V3.0&quot; /* version of SNNS */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029407"></A>  </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029408"></A>SNNS 	&quot;SNNS network definition file&quot;  /* output file header */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029409"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029410"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029411"></A>/* eleven different headers */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029412"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029413"></A>GENERATED_AT 	&quot;generated at&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029414"></A>NETWORK_NAME  	 &quot;network name :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029415"></A>SOURCE_FILES 	&quot;source files&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029416"></A>NO.OF_UNITES 	 &quot;no. of unites :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029417"></A>NO.OF_CONNECTIONS 	 &quot;no. of connections :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029418"></A>NO.OF_UNIT_TYPES 	 &quot;no. of unit types :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029419"></A>NO.OF_SITE_TYPES 	 &quot;no. of site types :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029420"></A>LEARNING_FUNCTION  	&quot;learning function :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029421"></A>PRUNING_FUNCTION  	&quot;pruning function :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029422"></A>FF_LEARNING_FUNCTION  	 &quot;subordinate learning function :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029423"></A>UPDATE_FUNCTION 	 &quot;update function :&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029424"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029425"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029426"></A>/* titles of the different sections */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029427"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029428"></A>UNIT_SECTION_TITLE 	&quot;unit definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029429"></A>DEFAULT_SECTION_TITLE 	&quot;unit default section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029430"></A>SITE_SECTION_TITLE	&quot;site definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029431"></A>TYPE_SECTION_TITLE 	&quot;type definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029432"></A>CONNECTION_SECTION_TITLE  	&quot;connection definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029433"></A>LAYER_SECTION_TITLE	&quot;layer definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029434"></A>SUBNET_SECTION_TITLE	&quot;subnet definition section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029435"></A>TRANSLATION_SECTION_TITLE 	&quot;3D translation section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029436"></A>TIME_DELAY_SECTION_TITLE  	&quot;time delay section&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029440"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029483"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029484"></A>/* column-titles of the different tables */ </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029441"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029442"></A>NO  	&quot;no.&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029443"></A>TYPE_NAME 	&quot;type name&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029444"></A>UNIT_NAME 	&quot;unit name&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029445"></A>ACT 	&quot;act&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029446"></A>BIAS	&quot;bias&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029447"></A>ST 	&quot;st&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029448"></A>POSITION 	&quot;position&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029449"></A>SUBNET 	&quot;subnet&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029450"></A>LAYER 	&quot;layer&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029451"></A>ACT_FUNC	&quot;act func&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029452"></A>OUT_FUNC	&quot;out func&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029453"></A>SITES	&quot;sites&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029454"></A>SITE_NAME 	&quot;site name&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029455"></A>SITE_FUNCTION 	&quot;site function&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029456"></A>NAME 	&quot;name&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029457"></A>TARGET 	&quot;target&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029458"></A>SITE 	&quot;site&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029459"></A>SOURCE:WEIGHT 	&quot;source:weight&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029460"></A>UNIT_NO 	&quot;unitNo.&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029461"></A>DELTA_X 	&quot;delta x&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029462"></A>DELTA_Y	&quot;delta y&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029463"></A>Z 	&quot;z&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029464"></A>LLN 	&quot;LLN&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029465"></A>LUN 	&quot;LUN&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029466"></A>TROFF 	&quot;Troff&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029467"></A>SOFF  	&quot;Soff&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029468"></A>CTYPE  	&quot;Ctype&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029469"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029470"></A>INTEGER	[&quot;0&quot;-&quot;9&quot;]+                                     /*integer */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029471"></A>SFLOAT	[&quot;+&quot; | &quot; &quot; | &quot;-&quot;] [&quot;1&quot; | &quot;0&quot;] &quot;.&quot; [&quot;0&quot;-&quot;9&quot;]{5} /*signed float*/ </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029360"></A>STRING 	(&quot;A&quot;-&quot;Z&quot; | &quot;a&quot;-&quot;z&quot; | &quot;|&quot;)+                     /*string */</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix3">
+<A NAME="pgfId-1029485"></A>Grammar:</H3>
+<P CLASS="Body2">
+<A NAME="pgfId-1029501"></A>out_file	::= file_header sections</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029502"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029503"></A>file_header	:= WHITESPACE  COMMENT h_snns EOL COMMENT h_generated_at EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029504"></A>	COMMENT h_network_name EOL COMMENT h_source_files EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029505"></A>	COMMENT h_no.of_unites EOL COMMENT h_no.of_connections EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029506"></A>	COMMENT h_no.of_unit_types EOL COMMENT h_no.of_site_types EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029507"></A>	COMMENT h_learning_function EOL COMMENT h_update_function EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029508"></A>	COMMENT h_pruning_function EOL </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029509"></A>	COMMENT ff_learning_function EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029510"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029511"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029512"></A>/* parts of the file-header */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029513"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029514"></A>h_snns 	::= SNNS BLANKS_TABS VERSION </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029515"></A>h_generated_at 	::= GENERATED_AT BLANKS_TABS CSTRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029516"></A>h_network_name 	::= NETWORK_NAME BLANKS_TABS STRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029517"></A>h_source_files 	::= SOURCE_FILES [BLANKS_TABS COLON BLANKS_TABS CSTRING]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029518"></A>h_no.of_unites	::= NO.OF_UNITES BLANKS_TABS INTEGER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029519"></A>h_no.of_connections 	::= NO.OF_CONNECTIONS BLANKS_TABS INTEGER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029520"></A>h_no.of_unit_types 	::= NO.OF_UNIT_TYPES BLANKS_TABS INTEGER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029521"></A>h_no.of_site_types 	::= NO.OF_SITE_TYPES BLANKS_TABS INTEGER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029522"></A>h_learning_function 	::= LEARNING_FUNCTION BLANKS_TABS STRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029523"></A>h_pruning_function 	::= PRUNING_FUNCTION BLANKS_TABS STRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029524"></A>h_ff_learning_function  	::= FF_LEARNING_FUNCTION BLANKS_TABS STRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029525"></A>h_update_function 	::= UPDATE_FUNCTION BLANKS_TABS STRING</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029526"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029527"></A>sections 	::= COMMENT unit_section [COMMENT default_section]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029528"></A>	[COMMENT site_section] [COMMENT type_section]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029529"></A> 	[COMMENT subnet_section] [COMMENT conn_section]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029530"></A> 	[COMMENT layer_section] [COMMENT trans_section]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029531"></A> 	[COMMENT time_delay_section] COMMENT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029532"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029533"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029534"></A>/* unit default section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029535"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029536"></A>default_section 	::= DEFAULT_SECTION_TITLE CUT COMMENT WHITESPACE   </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029703"></A>	default_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029704"></A>default_block 	::= default_header SEVEN_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029538"></A> 	{COMMENT default_def} SEVEN_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029539"></A>default_header	::= ACT COL_SEP BIAS COL_SEP ST COL_SEP SUBNET COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029540"></A>	LAYER COL_SEP ACT_FUNC COL_SEP OUT_FUNC CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029541"></A>default_def  	::= SFLOAT W_COL_SEP SFLOAT W_COL_SEP STRING W_COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029542"></A>	INTEGER W_COL_SEP INTEGER W_COL_SEP STRING W_COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029543"></A>	STRING CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029544"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029545"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029546"></A>/* site definition section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029547"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029548"></A>site_section 	::= SITE_SECTION_TITLE CUT COMMENT WHITESPACE  site_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029549"></A>site_block 	::= site_header TWO_COLUMN_LINE EOL {COMMENT site_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029550"></A>	TWO_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029551"></A>site_header	::= SITE_NAME SITE_FUNCTION CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029552"></A>site_def 	::= STRING W_COL_SEP STRING CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029553"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029554"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029555"></A>/* type definition section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029556"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029557"></A>type_section	::= TYPE_SECTION_TITLE CUT COMMENT WHITESPACE  type_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029558"></A>type_block	::= type_header FOUR_COLUMN_LINE EOL {COMMENT type_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029559"></A>	FOUR_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029560"></A>type_header 	::= NAME COL_SEP ACT_FUNC COL_SEP OUT_FUNC COL_SEP SITES</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029705"></A>	CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029561"></A>type_def 	::= STRING W_COL_SEP STRING W_COL_SEP STRING W_COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029562"></A>	[{STRING COMMA} STRING] CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029563"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029564"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029565"></A>/* subnet definition section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029566"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029567"></A>subnet_section 	::= SUBNET_SECTION_TITLE CUT COMMENT WHITESPACE</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029706"></A>	subnet_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029568"></A>subnet_block	::= subnet_header TWO_COLUMN_LINE EOL {COMMENT subnet_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029569"></A>	TWO_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029570"></A>subnet_header	::= SUBNET COL_SEP UNIT_NO CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029499"></A>subnet_def 	::= INTEGER W_COL_SEP {INTEGER COMMA} INTEGER CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029707"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029708"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029711"></A>/* unit definition section /*</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029712"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029713"></A>unit_section	::= UNIT_SECTION_TITLE CUT COMMENT WHITESPACE  unit_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029714"></A>unit_block	::= unit_header TEN_COLUMN_LINE EOL {COMMENT unit_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029715"></A>	TEN_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029716"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029717"></A>unit_header 	::= NO COL_SEP TYPE_NAME COL_SEP UNIT_NAME COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029718"></A>	ACT COL_SEP BIAS COL_SEP ST COL_SEP POSITION COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029719"></A>	ACT_FUNC COL_SEP OUT_FUNC COL_SEP SITES CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029720"></A>unit_def  	::= INTEGER W_COL_SEP ((STRING W_COL_SEP) | COL_SEP)</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029721"></A>	((STRING W_COL_SEP) | COL_SEP) ((SFLOAT W_COL_SEP) | COL_SEP)</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029722"></A>	((SFLOAT W_COL_SEP) | COL_SEP) ((STRING W_COL_SEP) | COL_SEP)</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029723"></A>	INTEGER COMMENT INTEGER COMMENT INTEGER W_COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029724"></A>	((STRING W_COL_SEP) | COL_SEP) ((STRING W_COL_SEP) | COL_SEP) </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029725"></A>	[{STRING COMMA} STRING]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029726"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029727"></A>/* connection definition section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029728"></A>                     </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029729"></A>connection_section 	::= CONNECTION_SECTION_TITLE CUT </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029730"></A>	COMMENT WHITESPACE connection_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029731"></A>connection_block	::= connection_header THREE_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029732"></A>	{COMMENT connection_def} THREE_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029733"></A>connection_header 	::= TARGET COL_SEP SITE COL_SEP SOURCE:WEIGHT CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029734"></A>connection_def 	::= ((INTEGER W_COL_SEP) | COL_SEP) STRING W_COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029735"></A>  	{INTEGER WHITESPACE  COLON WHITESPACE  SFLOAT COMMA}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029736"></A> 	INTEGER WHITESPACE  COLON WHITESPACE  SFLOAT CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029737"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029738"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029739"></A>/* layer definition section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029740"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029741"></A>layer_section 	::= LAYER_SECTION_TITLE CUT COMMENT WHITESPACE  layer_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029742"></A>layer_block 	::= layer_header TWO_COLUMN_LINE EOL {COMMENT layer_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029743"></A>	TWO_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029744"></A>layer_header 	::= LAYER COL_SEP UNIT_NO CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029745"></A>layer_def	::= INTEGER W_COL_SEP {INTEGER COMMENT} INTEGER CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029746"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029747"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029748"></A>/* 3D translation section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029749"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029750"></A>translation_section 	::= TRANSLATION_SECTION_TITLE CUT </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029751"></A>	COMMENT WHITESPACE  translation_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029752"></A>translation_block	::= translation_header THREE_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029753"></A>	{COMMENT translation_def} THREE_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029754"></A>translation_header	::= DELTA_X COL_SEP DELTA_Y COL_SEP Z CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029755"></A>translation_def 	::= INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER     </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029756"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029757"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029758"></A>/* time delay section */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029759"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029760"></A>td_section	::= TIME_DELAY_SECTION_TITLE CUT COMMENT WHITESPACE </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029775"></A>	td_block</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029761"></A>td_block	::= td_header SIX_COLUMN_LINE EOL {COMMENT td_def}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029762"></A>	SIX_COLUMN_LINE EOL</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029763"></A>td_header	::= NO COL_SEP LLN COL_SEP LUN COL_SEP</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029764"></A>	TROFF COL_SEP SOFF COL_SEP CTYPE CUT</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029765"></A>td_def 	::= INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER W_COL_SEP </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029709"></A>	INTEGER W_COL_SEP INTEGER W_COL_SEP INTEGER W_COL_SEP</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix2">
+<A NAME="pgfId-1029776"></A>Grammar of the Pattern Files</H3>
+<P CLASS="Body">
+<A NAME="pgfId-1029792"></A>The typographic conventions used for the pattern file grammar are the same as for the network file grammar (see section A.3.1.1).</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix3">
+<A NAME="pgfId-1029801"></A>Terminal Symbols</H3>
+<P CLASS="Body2">
+<A NAME="pgfId-1029816"></A>WHITE	{&quot; &quot; | &quot;&#92;t&quot;}</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029817"></A>FREE	{^&quot;&#92;n&quot;}                      /* anything up to EOL */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029818"></A>COMMENT	&quot;#&quot; FREE &quot;&#92;n&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029819"></A>L_BRACKET	&quot;[&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029820"></A>R_BRACKET 	&quot;]&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029821"></A>INT	[&quot;0&quot;-&quot;9&quot;]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029822"></A>V_NUMBER 	[Vv]{INT}+&quot;.&quot;{INT}+           /* version number */</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029823"></A>NUMBER 	[-+]?{{INT}+ | {INT}+{EXP} |{INT}+&quot;.&quot;{INT}*({EXP})? |</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029824"></A> 	{INT}*&quot;.&quot;{INT}+({EXP})?} </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029825"></A>EXP	[Ee][-+]?{INT}+</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029826"></A>VERSION_HEADER 	&quot;SNNS pattern definition file&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029827"></A>GENERATED_AT 	&quot;generated at&quot; {FREE}* &quot;&#92;n&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029828"></A>NO_OF_PATTERN	&quot;No. of patterns&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029829"></A>NO_OF_INPUT 	&quot;No. of input units&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029830"></A>NO_OF_OUTPUT 	&quot;No. of output units&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029831"></A>NO_OF_VAR_IDIM	&quot;No. of variable input dimensions&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029832"></A>NO_OF_VAR_ODIM	&quot;No. of variable output dimensions&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029833"></A>MAXIMUM_IDIM	&quot;Maximum input dimensions&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029834"></A>MAXIMUM_ODIM 	&quot;Maximum output dimensions&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029835"></A>NO_OF_CLASSES 	&quot;No. of classes&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029836"></A>CLASS_REDISTRIB  	&quot;Class redistribution&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029837"></A>REMAPFUNCTION	&quot;Remap function&quot; {WHITE}* &quot;:&quot;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029814"></A>REMAP_PARAM 	&quot;Remap parameters&quot;  {WHITE}* &quot;:&quot;</P>
+</DIV>
+<DIV>
+<H3 CLASS="Appendix3">
+<A NAME="pgfId-1029847"></A>Grammar</H3>
+<P CLASS="Body2">
+<A NAME="pgfId-1029856"></A>pattern_file 	::= header pattern_list                     </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029857"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029858"></A>header	::= VERSION_HEADER V_NUMBER GENERATED_AT NO_OF_PATTERN </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029894"></A>	NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029859"></A>	i_head [o_head] [vi_head] [vo_head] [cl_head] [rm_head]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029860"></A>i_head	::= NO_OF_INPUT NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029861"></A>o_head 	::= NO_OF_OUTPUT NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029862"></A>vi_head	::= NO_OF_VAR_IDIM NUMBER MAXIMUM_IDIM actual_dim</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029863"></A>vo_head 	::= NO_OF_VAR_ODIM NUMBER MAXIMUM_ODIM actual_dim</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029864"></A>cl_head 	::= NO_OF_CLASSES NUMBER [cl_distrib]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029865"></A>rm_head	::= REMAPFUNCTION NAME [rm_params]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029866"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029867"></A>actual_dim	::= L_BRACKET actual_dim_rest R_BRACKET | </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029868"></A> 	L_BRACKET R_BRACKET                </P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029869"></A>actual_dim_rest 	::= NUMBER | actual_dim_rest NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029870"></A>cl_distrib	::= CLASS_REDISTRIB L_BRACKET paramlist R_BRACKET</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029871"></A>rm_params	::= REMAP_PARAM L_BRACKET paramlist R_BRACKET</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029872"></A>paramlis 	::= NUMBER | paramlist NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029873"></A>&nbsp;</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029874"></A>pattern_list	::= pattern | pattern_list pattern</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029875"></A>pattern	::= pattern_start pattern_body pattern_class</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029876"></A>pattern_start	::= [actual_dim]</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029877"></A>pattern_body 	::= NUMBER | pattern_body NUMBER</P>
+<P CLASS="Body2">
+<A NAME="pgfId-1029854"></A>pattern_class 	::= NUMBER | NAME</P>
+</DIV>
+</BODY>
+</HTML>

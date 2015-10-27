@@ -1,0 +1,302 @@
+SNNS Java Version
+
+Function Declaration File
+
+<Comment>
+
+Format:
+<Function>kernel name|presentation name|function type|no of parameters|1. parameter name|1. parameter tool tip text|1. parameter default value|2. parameter name|...<\Function>
+
+
+The function types are:
+
+OUT_FUNC                 1
+ACT_FUNC                 2
+SITE_FUNC                3
+LEARN_FUNC               4
+UPDATE_FUNC              5
+INIT_FUNC                6
+ACT_DERIV_FUNC           7
+JOG_WEIGHT_FUNC          8
+ACT_2_DERIV_FUNC         9
+PRUNING_FUNC            10
+TEST_FUNC               11
+REMAP_FUNC              12
+PRUNING_LEARN           13
+CC_LEARN                14
+CC_MINI                 15
+CC_MODI                 16
+CC_ACT                  17
+
+
+You may use greek letters by unicode ( http:\\www.unicode.org ) for the
+parameter names and their tool tip texts.
+You have to write them in the way: {0x03b1} for alpha, {0x03b2} for beta,...
+
+The first read function of its type is going to be the default function.
+
+<\Comment>
+
+
+
+
+Initializing functions: (SNNS, User Manual, Version 4.2, pp.82-87)
+
+<Function>Randomize_Weights|Random Weights|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+
+<Function>ART1_Weights|for ART1 networks|6|2|{0x03b2}||1.0|{0x03b3}||1.0<\Function>
+<Function>ART2_Weights|for ART2 networks|6|2|d|Output value of F2 winner unit|0.9|{0x03b3}||1.2<\Function>
+<Function>ARTMAP_Weights|for ARTMAP networks|6|4|<html>{0x03b2}<small>a</small></html>||1.0|<html>{0x03b3}<small>a</small></html>||1.0|<html>{0x03b2}<small>b</small></html>||1.0|<html>{0x03b3}<small>b</small></html>||1.0<\Function>
+
+CC_Weights im Programmcode
+
+<Function>ClippHebb|ClippHebb|6|2|bias in||1.0|bias out||-1.0<\Function>
+<Function>CPN_Rand_Pat|for Counterpropagation, random pattern|6|0<\Function>
+<Function>CPN_Weights_v3.2|for Counterpropagation, ver. 3.2 (cube)|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+<Function>CPN_Weights_v3.3|for Counterpropagation, ver. 3.3 (sphere)|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+<Function>DLVQ_Weights|for Dynamic Learning Vector Quantization|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+<Function>Hebb|Hebbian|6|2|bias in||1.0|bias out||-1.0<\Function>
+<Function>Hebb_Fixed_Act|Hebbian, fixed number of 1s|6|2|activity|number of active units of the patterns|10.0|distortion|degree of distortion in percent|10.0<\Function>
+<Function>JE_Weights|for Jordan or Elman networks|6|5|min|minimum value|-1.0|max|maximum value|1.0|{0x03bb}|self recurrent links|0.0|{0x03b3}|other links to context units|1.0|{0x03c8}|initial activation|0.2<\Function>
+<Function>Kohonen_Weights_v3.2|for Self-Organizing Maps, ver 3.2|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+<Function>Kohonen_Const|for Self-Organizing Maps, constant|6|0<\Function>
+<Function>Kohonen_Rand_Pat|for Self-Organizing Maps, random patterns|6|0<\Function>
+<Function>PseudoInv|by Pseudoinverse|6|0<\Function>
+
+<Function>Random_Weights_Perc|Random weights, mentions topology|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+<Function>RBF_Weights|RBF weights|6|5|0scale||0.0|1scale||1.0|{0x03bb}|smoothness|0.0|bias||0.02|deviation||0.0<\Function>
+<Function>RBF_Weights_Kohonen|RBF weights kohonen|6|3|cycles|learn cycles|50.0|rate|learning rate|0.4|shuffle||1.0<\Function>
+<Function>RBF_Weights_Redo|RBF weights redo|6|3|0scale||0.0|1scale||1.0|{0x03bb}|smoothness|0.0<\Function>
+<Function>RM_Random_Weights|RM random weights|6|2|min|minimum value|-1.0|max|maximum value|1.0<\Function>
+
+
+
+
+
+
+Update functions: (SNNS, User Manual, Version 4.2, pp.76-81)
+
+<Function>Topological_Order|Topological order|5|0<\Function>
+
+<Function>ART1_Stable|ART1 to stable state|5|1|{0x03c1}|Vigilance|0.1<\Function>
+<Function>ART1_Synchronous|ART1 synchronous order|5|1|{0x03c1}|Vigilance|0.1<\Function>
+<Function>ART2_Stable|ART2 to stable state|5|5|{0x03c1}|Vigilance|0.9|a|Influenz of lower level in F1 by middle level|10.0|b|Influenz of middle level in F1 by upper level|10.0|c|part of length vector p used to compute error|0.1|{0x03b8}|threshold for x and q units|0.0<\Function>
+<Function>ART2_Synchronous|ART2 synchrounous order|5|5|{0x03c1}|Vigilance|0.9|a|Influenz of lower level in F1 by middle level|10.0|b|Influenz of middle level in F1 by upper level|10.0|c|part of length vector p used to compute error|0.1|{0x03b8}|threshold for x and q units|0.0<\Function>
+<Function>ARTMAP_Stable|ARTMAP to stable state|5|3|{0x03c1}(a)|Vigilance|0.7|{0x03c1}(b)|Vigilance|0.7|{0x03c1}|Vigilance|0.7<\Function>
+<Function>ARTMAP_Synchronous|ARTMAP synchronous order|5|3|{0x03c1}(a)|Vigilance of part a|0.7|{0x03c1}(b)|Vigilance of part b|0.7|{0x03c1}|Vigilance|0.7<\Function>
+<Function>Auto_Synchronous|Autosynchronous|5|1|n|steps|50.0<\Function>
+<Function>BAM_Order|BAM order|5|0<\Function>
+<Function>BBTT_Order|BBTT order|5|0<\Function>
+
+CC_Order im Programmcode
+
+<Function>CounterPropagation|Counterpropagation order|5|0<\Function>
+<Function>Dynamic_LVQ|Dynamic Learning Vector Quantization|5|0<\Function>
+<Function>Hopfield_Fixed_Act|Hopfield fixed activation|5|1|x|number of units with activation 1|10.0<\Function>
+<Function>Hopfield_Synchronous|Hopfield synchronous order|5|0<\Function>
+<Function>JE_Order|Jordan and Elman networks order|5|0<\Function>
+<Function>JE_Special|Special Jordan and Elman networks order|5|0<\Function>
+<Function>Kohonen_Order|Kohonen order|5|0<\Function>
+<Function>Random_Order|Random Order|5|0<\Function>
+<Function>Random_Permutation|Random Permutation|5|0<\Function>
+<Function>Serial_Order|Serial order|5|0<\Function>
+<Function>Synchronous_Order|Synchronous order|5|0<\Function>
+<Function>TimeDelay_Order|Time-delay order|5|0<\Function>
+
+
+
+
+Learning functions: (SNNS, User Manual, Version 4.2, pp.67-75)
+
+<Function>Std_Backpropagation|Backpropagation|4|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+
+<Function>ART1|ART1|4|1|{0x03c1}|Vigilance|0.1<\Function>
+<Function>ART2|ART2|4|5|{0x03c1}|Vigilance|0.9|a|Lower level influence|10.0|b|Middle level influence|10.0|c|Subvector size|0.1|{0x03b8}|Threshold|0.0<\Function>
+<Function>ARTMAP|ARTMAP|4|3|<html>{0x03c1}<small>a</small></html>|Vigilance for ART(a) subnet|0.7|<html>{0x03c1}<small>b</small></html>|Vigilance for ART(b) subnet|0.7|{0x03c1}|Vigilance for reset control|0.7<\Function>
+
+<Comment>
+<Function>BackPercolation|Backpercolation|4|3|{0x03bb}|Error magnification|1.0|{0x03b8}|Threshold|0.1|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<\Comment>
+
+<Function>BackpropBatch|Batch Backpropagation|4|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>TimeDelayBackprop|Time-Delay Backprop|4|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>BackpropChunk|BackpropChunk|4|5|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|N|chunk size|1|lower|lower limit for random noise|0.01|upper|upper limit for random noise|0.03<\Function>
+<Function>BackpropMomentum|Backprop-Momentum|4|4|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|c|Flat spot elimination|0.1|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>BPTT|Backprop thru time|4|3|{0x03b7}|Step width|0.2|{0x03bc}|Momentum|0.5|backstep|Steps back in time|5.0<\Function>
+<Function>BBPTT|Batch Backprop thru time|4|3|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|backstep|Steps back in time|5.0<\Function>
+<Function>BackpropWeightDecay|Backprop-Weight Decay|4|4|{0x03b7}|Step width|0.2|d|Weight decay|0.001|<html>d<small>min</small></html>|minimal link weight|0.01|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+
+Cascade Correlation: s. weiter unten
+
+<Function>Counterpropagation|Counterpropagation|4|3|{0x03b1}|Kohonen layer parameter|0.3|{0x03b2}|Grossberg layer parameter|0.5|{0x03b8}|Threshold|0.0<\Function>
+<Function>Dynamic_LVQ|Dynamic LVQ|4|3|{0x03b7}+|Step width for correctly classified vectors|0.03|{0x03b7}-|Step width for incorrectly classified vectors|0.03|cycles|Training cycles|5.0<\Function>
+<Function>Hebbian|Hebbian|4|3|n|Step width|0.01|<html>W<small>max</small></html>|Max. link weight|1.0|count|Update steps|1.0<\Function>
+<Function>Kohonen|Kohonen|4|5|h(0)|Initial adaptation height|0.1|r(0)|Initial adaption radius|3.0|{0x03b1}H|height decrease factor|0.99|{0x03b1}R|Radius decrease factor|0.99|h|Horizontal size|10.0<\Function>
+<Function>Monte-Carlo|Monte-Carlo|4|2|min|lower limit of weights and biases|-5|max|upper limit of weights and biases|5<\Function>
+<Function>Simulated_Annealing_SS_error|Simulated Annealing (ss)|4|4|min|lower limit of weights and biases|-5|max|upper limit of weights and biases|5|<html>T<small>0</small></html>|start temperature|5.0|deg|degredatation term of the temperature|0.999<\Function>
+<Function>Simulated_Annealing_WTA_error|Simulated Annealing (wta)|4|4|min|lower limit of weights and biases|-5|max|upper limit of weights and biases|5|<html>T<small>0</small></html>|start temperature|5.0|deg|degredatation term of the temperature|0.999<\Function>
+<Function>Simulated_Annealing_WWTA_error|Simulated Annealing (wwta)|4|4|min|lower limit of weights and biases|-5|max|upper limit of weights and biases|5|<html>T<small>0</small></html>|start temperature|5.0|deg|degredation term of the temperature|0.999<\Function>
+<Function>Quickprop|Quickprop|4|4|{0x03b7}|Step width|0.2|{0x03bc}|Maximum growth factor|2.0|{0x03bd}|Weight decay|1.0E-4|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>QPTT|Quickprop thru time|4|4|{0x03b7}|Step width|0.02|{0x03bc}|Maximum growth factor|1.5|{0x03bd}|Weight decay|1.0E-4|backstep|Steps back in time|5.0<\Function>
+<Function>RadialBasisLearning|Radial Basis Learning|4|5|{0x03b7}1|Centers|0.01|{0x03b7}2|Bias|0.0|weights|Weights|0.01|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|{0x03bc}|Momentum|0.8<\Function>
+<Function>RBF-DDA|RBF-Dynamic Decay Adjustment|4|3|{0x03b8}+|Positive threshold|1.0|{0x03b8}-|Negative threshold|1.0|n|Units in a row|5.0<\Function><Function>JE_BP|JE Backpropagation|4|3|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|forceT|Teacher Forcing|.5<\Function>
+<Function>RM_delta|Delta-rule|4|2|n|Step width|0.01|cycles|Update steps|50.0<\Function>
+<Function>Rprop|Resilient Propagation|4|3|{0x03b4}0|Starting {0x03b4}|0.1|{0x03b4}max|Maximum {0x03b4}|50.0|{0x03b1}|Weight decay|4.0<\Function>
+<Function>SCG|Scaled Cunjugate Gradient|4|4|<html>{0x03c3}<small>1</small></html>|<html>{0x03c3}<small>1</small></</html>|0|<html>{0x03bb}<small>1</small></</html>|<html>{0x03bb}<small>1</small></</html>|0|<html>{0x0394}<small>max</small></html>|Max. nonpropagated error|0.1|<html>{0x03f5}<small>1</small></html>|floating point precision|0<\Function>
+
+
+fuer Jordan-Elman Netze: (SNNS, User MAnual, Version 4.2, pp.207)
+
+<Function>JE_BP|JE Backpropagation|4|3|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|forceT|Teacher Forcing|.5<\Function>
+<Function>JE_BP_Momentum|JE Backprop-Momentum|4|5|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|c|Flat spot elimination|0.1|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|forceT|Teacher Forcing|.5<\Function>
+<Function>JE_Quickprop|JE Quickprop|4|5|{0x03b7}|Step width|0.2|{0x03bc}|Maximum growth factor|2.0|{0x03bd}|Weight decay|1.0E-4|<html>d<small>max</small></html>|Max. nonpropagated error|0.1|forceT|Teacher Forcing|.5<\Function>
+<Function>JE_Rprop|JE Rprop|4|4|{0x03b4}0|Starting {0x03b4}|0.3|{0x03b4}max|Maximum {0x03b4}|30.0|{0x03b1}|Weight decay|4.0|forceT|Teacher Forcing|.5<\Function>
+
+
+
+
+
+
+
+Remapping functions: (SNNS, User Manual, Version 4.2, pp.87-90)
+
+<Function>None|<none>|12|0<\Function>
+<Function>Binary|Binary|12|0<\Function>
+<Function>Inverse|Inverse|12|0<\Function>
+<Function>Clip|Clip|12|0<\Function>
+<Function>LinearScale|Linear scale|12|2|m|deviation|1.0|c|absolute coefficient|0.0<\Function>
+<Function>Norm|Norm|12|0<\Function>
+<Function>Threshold|Threshold|12|4|lower||-3.0|upper||3.0|inner|inner training goal|0.0|outer|outer training goal|5.0<\Function>
+
+
+Activation functions: (SNNS4.2/kernel/source/func_tbl.c)
+
+<Function>Act_Logistic|Act_Logistic|2|0<\Function>
+<Function>Act_Elliott|Act_Elliott|2|0<\Function>
+<Function>Act_BSB|Act_BSB|2|0<\Function>
+<Function>Act_TanH|Act_TanH|2|0<\Function>
+<Function>Act_TanH_Xdiv2|Act_TanH_Xdiv2|2|0<\Function>
+<Function>Act_Perceptron|Act_Perceptron|2|0<\Function>
+<Function>Act_Signum|Act_Signum|2|0<\Function>
+<Function>Act_Signum0|Act_Signum0|2|0<\Function>
+<Function>Act_Softmax|Act_Softmax|2|0<\Function>
+<Function>Act_StepFunc|Act_StepFunc|2|0<\Function>
+<Function>Act_HystStep|Act_HystStep|2|0<\Function>
+<Function>Act_BAM|Act_BAM|2|0<\Function>
+<Function>Logistic_notInhibit|Logistic_notInhibit|2|0<\Function>
+<Function>Act_MinOutPlusWeight|Act_MinOutPlusWeight|2|0<\Function>
+<Function>Act_Identity|Act_Identity|2|0<\Function>
+<Function>Act_IdentityPlusBias|Act_IdentityPlusBias|2|0<\Function>
+<Function>Act_LogisticTbl|Act_LogisticTbl|2|0<\Function>
+<Function>Act_RBF_Gaussian|Act_RBF_Gaussian|2|0<\Function>
+<Function>Act_RBF_MultiQuadratic|Act_RBF_MultiQuadratic|2|0<\Function>
+<Function>Act_RBF_ThinPlateSpline|Act_RBF_ThinPlateSpline|2|0<\Function>
+<Function>Act_less_than_0|Act_less_than_0|2|0<\Function>
+<Function>Act_at_most_0|Act_at_most_0|2|0<\Function>
+<Function>Act_at_least_2|Act_at_least_2|2|0<\Function>
+<Function>Act_at_least_1|Act_at_least_1|2|0<\Function>
+<Function>Act_exactly_1|Act_exactly_1|2|0<\Function>
+<Function>Act_Product|Act_Product|2|0<\Function>
+<Function>Act_ART1_NC|Act_ART1_NC|2|0<\Function>
+<Function>Act_ART2_Identity|Act_ART2_Identity|2|0<\Function>
+<Function>Act_ART2_NormP|Act_ART2_NormP|2|0<\Function>
+<Function>Act_ART2_NormV|Act_ART2_NormV|2|0<\Function>
+<Function>Act_ART2_NormW|Act_ART2_NormW|2|0<\Function>
+<Function>Act_ART2_NormIP|Act_ART2_NormIP|2|0<\Function>
+<Function>Act_ART2_Rec|Act_ART2_Rec|2|0<\Function>
+<Function>Act_ART2_Rst|Act_ART2_Rst|2|0<\Function>
+<Function>Act_ARTMAP_NCa|Act_ARTMAP_NCa|2|0<\Function>
+<Function>Act_ARTMAP_NCb|Act_ARTMAP_NCb|2|0<\Function>
+<Function>Act_ARTMAP_DRho|Act_ARTMAP_DRho|2|0<\Function>
+<Function>Act_LogSym|Act_LogSym|2|0<\Function>
+<Function>Act_CC_Thresh|Act_CC_Thresh|2|0<\Function>
+<Function>Act_Sinus|Act_Sinus|2|0<\Function>
+<Function>Act_Exponential|Act_Exponential|2|0<\Function>
+<Function>Act_TD_Logistic|Act_TD_Logistic|2|0<\Function>
+<Function>Act_TD_Elliott|Act_TD_Elliott|2|0<\Function>
+<Function>Act_Euclid|Act_Euclid|2|0<\Function>
+<Function>Act_Component|Act_Component|2|0<\Function>
+<Function>Act_RM|Act_RM|2|0<\Function>
+<Function>Act_TACOMA|Act_TACOMA|2|0<\Function>
+
+
+Output functions: (SNNS4.2/kernel/source/func_tbl.c)
+
+<Function>Out_Identity|Out_Identity|1|0<\Function>
+<Function>Out_Threshold05|Out_Threshold05|1|0<\Function>
+<Function>Out_Clip_01|Out_Clip_01|1|0<\Function>
+<Function>Out_Clip_11|Out_Clip_11|1|0<\Function>
+<Function>Out_ART2_Noise_PLin|Out_ART2_Noise_PLin|1|0<\Function>
+<Function>Out_ART2_Noise_ContDiff|Out_ART2_Noise_ContDiff|1|0<\Function>
+
+Pruning functions: (SNNS4.2/kernel/source/func_tbl.c)
+
+<Function>MagPruning|Magnitude based|10|0<\Function>
+<Function>OptimalBrainDamage|Optimal Brain Damage|10|0<\Function>
+<Function>OptimalBrainSurgeon|Optimal Brain Surgeon|10|0<\Function>
+<Function>Skeletonization|Skeletonization|10|0<\Function>
+<Function>Noncontributing_Units|Non-contributing Units|10|0<\Function>
+
+
+
+Pruning learn functions:
+
+<Function>Std_Backpropagation|Backpropagation|13|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>Hebbian|Hebbian|13|3|n|Step width|0.01|<html>W<small>max</small></html>|Max. link weight|1.0|Count|Update steps|1.0<\Function>
+<Function>RM_delta|Delta-rule|13|2|n|Step width|0.01|cycles|Update steps|50.0<\Function>
+<Function>BackpropBatch|Batch Backpropagation|13|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>BackpropMomentum|Backprop-Momentum|13|4|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|c|Flat spot elimination|0.1|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>BackpropWeightDecay|Backprop-Weight Decay|13|3|{0x03b7}|Step width|0.2|decay|Weight decay|0.0010|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>BPTT|Backprop thru time|13|3|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|backstep|Steps back in time|5.0<\Function>
+<Function>BBPTT|Batch Backprop thru time|13|3|{0x03b7}|Step width|0.2|{0x03bc}|Mometum|0.5|backstep|Steps back in time|5.0<\Function>
+<Function>Quickprop|Quickprop|13|4|{0x03b7}|Step width|0.2|{0x03bc}|Maximum growth factor|2.0|{0x03bd}|Weight decay|1.0E-4|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>QPTT|Quickprop thru time|13|4|{0x03b7}|Step width|0.02|{0x03bc}|Maximum growth factor|1.5|{0x03bd}|Weight decay|1.0E-4|backstep|Steps back in time|5.0<\Function>
+<Function>Rprop|Rprop|13|3|{0x03b4}0|Starting {0x03b4}|0.3|{0x03b4}max|Maximum {0x03b4}|30.0|{0x03b1}|Weight decay|4.0<\Function>
+<Function>BackPercolation|Backpercolation|13|3|{0x03bb}|Error magnification|1.0|{0x03b8}|Threshold|0.1|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+<Function>Counterpropagation|Counterpropagation|13|3|{0x03b1}|Kohonen layer parameter|0.3|{0x03b2}|Grossberg layer parameter|0.5|{0x03b8}|Threshold|0.0<\Function>
+<Function>RadialBasisLearning|Radial Basis Learning|13|5|{0x03b7}1|Centers|1.0|{0x03b7}2|Bias|1.0|weights|Weights|1.0|<html>d<small>max</small></html>|Max. nonpropagated error|1.0|{0x03bc}|Momentum|1.0<\Function>
+<Function>RBF-DDA|RBF-Dynamic Decay Adjustment|13|3|{0x03b8}+|Positive threshold|1.0|{0x03b8}-|Negative threshold|1.0|n|Units in a row|1.0<\Function>
+<Function>TimeDelayBackprop|Time-Delay Backprop|13|2|{0x03b7}|Step width|0.2|<html>d<small>max</small></html>|Max. nonpropagated error|0.1<\Function>
+
+
+Cascade learn functions:
+
+<Function>Backprop|Backpropagation|14|5|{0x03b7}1|Step width, decent|0.1|{0x03bc}1|Momentum term|0.1|c|Flat spot elimination|0.1|{0x03b7}2|Step width, ascent|0.1|{0x03bc}2|siehe {0x03bc}1 (?)|0.1<\Function>
+<Function>Rprop|Resilient Propagation|14|5|{0x03b7}1-|Decreasing factor for minimizing net error|0.5|{0x03b7}1+|Increasing factor for minimizing net error|1.2|PF|Punk factor|9.7|{0x03b7}2-|Decreasing factor for maximizing the covariance|0.5|{0x03b7}2+|Increasing factor for maximizing the covariance|1.2<\Function>
+<Function>Quickprop|Quickprop|14|5|{0x03b7}1|Learning parameter for minimizing net error|0.0001|{0x03bc}1|Maximum growth parameter|2.0|{0x03bd}|Weight decay term to shrink the weights|0.00009|{0x03b7}2|Learning parameter for maximizing the covariance|0.0007|{0x03bc}2|siehe {0x03bc}1|2.0<\Function>
+
+
+
+Cascade minimalizing functions:
+
+
+<Function>SBC|Schwarz´s Bayesian|15|0<\Function>
+<Function>AIC|Akaikes information|15|0<\Function>
+<Function>CMSEP|Conservative mse of pred.|15|0<\Function>
+
+
+Cascade modifikation functions:
+
+<Function>NO_MOD|none|16|0<\Function>
+<Function>SDCC|Sibling/Descendant|16|1|{0x03bb}|Multiplier correlation of sibbling units|0.1<\Function>
+<Function>LFCC|Limited fan-in|16|1|k|Maximum fan-in|0.5<\Function>
+<Function>RLCC|Random layer|16|1|f|Multiplayer|0.5<\Function>
+<Function>ECC|Exponential|16|1|m|Exponential growth|0.4<\Function>
+<Function>GCC|Grouped|16|1|g|Number of groups|2<\Function>
+<Function>STAT|Static|16|3|b|Width of the first hidden layer|0|{0x0394}b|Maximum random difference to calculated width|0|d|Exponential growth|0<\Function>
+<Function>TACOMA|Tacoma|16|5|N|Runs of the Kohonen map|1|{0x03b5}|Step width of window function|0.5|{0x03bb}|If error in region is bigger than this, install unit|0.5|{0x03b3}|If correlation of windows is bigger than this, connect units|0.5|{0x03b2}|Initial radius of windows|0.5<\Function>
+
+
+Cascade activation functions:
+
+<Function>Act_Logistic|Logistic|17|0<\Function>
+<Function>Act_LogSym|Symmetrical logistic|17|0<\Function>
+<Function>Act_TanH|tanh|17|0<\Function>
+<Function>Act_Random|Random|17|0<\Function>
+
+<Comment>
+<Function>THRESHOLD|Threshold|17|0<\Function>
+<Function>SINUS|sin|17|0<\Function>
+<Function>EXPONENTIAL|Exponential|17|0<\Function>
+<\Comment>
+

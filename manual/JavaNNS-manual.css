@@ -1,0 +1,506 @@
+.current {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #000; background-color: #fc0}
+.level1 {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #fff; background-color: #89a}
+.level2 {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #fff; background-color: #89c}
+.level3 {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #000; background-color: #ccf}
+.path {  font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #fc0; background-color: #9ab}
+.pathNoLine {  font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #fc0; background-color: #9ab}
+.current a {  color: #000; text-decoration: none}
+.level1 a {  color: #fff; text-decoration: none}
+.level2 a {  color: #fff; text-decoration: none}
+.level3 a {  color: #000; text-decoration: none}
+.path a   {  color: #fc0}
+.level1 a:hover {  color: #fc0; text-decoration: none}
+.level2 a:hover {  color: #fff; text-decoration: none}
+.level3 a:hover {  color: #fff; text-decoration: none}
+.path a:hover   {  color: #fff}
+.pathNoLine a {  color: #fc0; text-decoration: none }
+
+.Figure {
+	margin-bottom: 24;
+	font-size: 90%;
+	color: #000;
+}
+LI.Bulletted {
+	color: #000;
+}
+
+
+
+A.link {
+	color: blue;
+	text-decoration: underline;
+}
+A.visited {
+	color: purple;
+	text-decoration: underline;
+}
+A.active {
+	color: red;
+	text-decoration: underline;
+}
+
+
+H1.Appendix1, H2.Appendix1, H3.Appendix1, H4.Appendix1, H5.Appendix1, H6.Appendix1 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 18.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Appendix1First, H2.Appendix1First, H3.Appendix1First, H4.Appendix1First, H5.Appendix1First, H6.Appendix1First {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 18.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Appendix1FirstTOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Times";
+}
+P.Appendix1TOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Times";
+}
+H1.Appendix2, H2.Appendix2, H3.Appendix2, H4.Appendix2, H5.Appendix2, H6.Appendix2 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 12.000000pt;
+	margin-bottom: 3.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Appendix2TOC {
+	display: block;
+	text-align: left;
+	text-indent: 14.173218pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Times";
+}
+H1.Appendix3, H2.Appendix3, H3.Appendix3, H4.Appendix3, H5.Appendix3, H6.Appendix3 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 12.000000pt;
+	margin-bottom: 3.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Appendix4, H2.Appendix4, H3.Appendix4, H4.Appendix4, H5.Appendix4, H6.Appendix4 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 12.000000pt;
+	margin-bottom: 3.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+
+P.Body {
+	display: block;
+	text-align: justify;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 6.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Body2 {
+	display: block;
+	text-align: justify;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 4.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.BodyCourierSmall {
+	display: block;
+	text-align: justify;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 2.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier";
+}
+P.Figure {
+	display: block;
+	text-align: justify;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 6.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.CellBody {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.CellHeading {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Centered {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 6.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Contents {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 18.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+LI.Figure {
+	display: block;
+	text-align: left;
+	text-indent: -48.188965pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 5.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 48.188965pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Footnote {
+	display: block;
+	text-align: left;
+	text-indent: -12.000229pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 18.000000pt;
+	margin-left: 30.000229pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.HeaderR {
+	display: block;
+	text-align: right;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Heading1, H2.Heading1, H3.Heading1, H4.Heading1, H5.Heading1, H6.Heading1 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 18.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Heading1TOC {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Heading2, H2.Heading2, H3.Heading2, H4.Heading2, H5.Heading2, H6.Heading2 {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 12.000000pt;
+	margin-bottom: 3.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Heading2TOC {
+	display: block;
+	text-align: left;
+	text-indent: 14.173218pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.HeadingRunIn, H2.HeadingRunIn, H3.HeadingRunIn, H4.HeadingRunIn, H5.HeadingRunIn, H6.HeadingRunIn {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 6.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Indented {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 18.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.Mono {
+	display: block;
+	text-align: left;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 6.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier New";
+}
+H1.MonoCentered, H2.MonoCentered, H3.MonoCentered, H4.MonoCentered, H5.MonoCentered, H6.MonoCentered {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 6.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Courier New";
+}
+LI.Numbered {
+	display: block;
+	text-align: justify;
+	margin-top: 6.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+LI.Numbered1 {
+	display: block;
+	text-align: justify;
+	margin-top: 6.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Subtitle1, H2.Subtitle1, H3.Subtitle1, H4.Subtitle1, H5.Subtitle1, H6.Subtitle1 {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 9.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Subtitle2, H2.Subtitle2, H3.Subtitle2, H4.Subtitle2, H5.Subtitle2, H6.Subtitle2 {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Subtitle2-Top, H2.Subtitle2-Top, H3.Subtitle2-Top, H4.Subtitle2-Top, H5.Subtitle2-Top, H6.Subtitle2-Top {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 7.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+P.TableFootnote {
+	display: block;
+	text-align: left;
+	text-indent: -12.000229pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 18.000000pt;
+	margin-left: 30.000229pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.TableTitle, H2.TableTitle, H3.TableTitle, H4.TableTitle, H5.TableTitle, H6.TableTitle {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+H1.Title, H2.Title, H3.Title, H4.Title, H5.Title, H6.Title {
+	display: block;
+	text-align: center;
+	text-indent: 0.000000pt;
+	margin-top: 38.000000pt;
+	margin-bottom: 18.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 0.000000pt;
+	color: #000000;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+}
+EM.Emphasis {
+	font-style: Italic;
+}
+EM.EquationVariables {
+	font-style: Italic;
+}
