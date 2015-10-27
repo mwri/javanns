@@ -1,0 +1,5 @@
+--- /dev/null
++++ b/target.def
+@@ -0,0 +1 @@
++platform.name=Linux
+\ No newline at end of file

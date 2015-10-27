@@ -1,0 +1,8 @@
+--- a/build.xml
++++ b/build.xml
+@@ -1,4 +1,4 @@
+-<project name="JavaNNS" default="javanns" basedir=".">
++<project name="JavaNNS" default="jar" basedir=".">
+ 	<description>
+ 		JavaNNS Ant-file
+ 	</description>

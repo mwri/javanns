@@ -1,0 +1,10 @@
+--- a/build.xml
++++ b/build.xml
+@@ -125,7 +125,6 @@
+ 			<fileset file="FnDeclaration.txt"/>
+ 			<fileset file="Default.properties"/>
+ 			<fileset file="import.properties"/>
+-			<fileset file="${files.ki}"/>
+ 		</jar>
+ 	</target>
+ 

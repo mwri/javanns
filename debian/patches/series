@@ -1,0 +1,5 @@
+linux_target
+make_kernelinterface
+make_jar
+dont_use_precompiled_lib
+use_libjavanns_lib

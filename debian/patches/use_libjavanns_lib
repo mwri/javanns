@@ -1,0 +1,33 @@
+--- a/javanns/JavaNNSProperties.java
++++ b/javanns/JavaNNSProperties.java
+@@ -89,7 +89,7 @@
+   /**
+    * JavaNNS property key for initial JavaNNS main window height
+    */
+-  public static final String LIBRARY_PATH_KEY = "SNNS_jkr library path";
++  public static final String LIBRARY_PATH_KEY = "javanns library path";
+ 
+ 
+   Snns snns;
+--- a/javanns/Network.java
++++ b/javanns/Network.java
+@@ -70,7 +70,7 @@
+   public Network( Snns snns ) throws Exception{
+     this.snns = snns;
+     if( !loadKernel()) throw
+-      new Exception("The system couldn´t find the library SNNS_jkr\nJavaNNS couldn´t start.");
++      new Exception("The system couldn´t find the library javanns\nJavaNNS couldn´t start.");
+     layers = new Layers( this );
+     new NetChangeListener();
+     /*
+--- a/javanns/Snns.java
++++ b/javanns/Snns.java
+@@ -72,7 +72,7 @@
+   // WICHTIG : Im jar file darf es keine weitere Datei geben, die im Namen die
+   // Zeichenkette SNNS_jkr enthaelt, da ansonsten die Methode loadLibrary
+   // in Network durcheinandergeraten koennte
+-  static final String LIBRARY_NAME = "SNNS_jkr";
++  static final String LIBRARY_NAME = "javanns";
+ 
+   /**
+    * Filename of the javanns fn-declaration file

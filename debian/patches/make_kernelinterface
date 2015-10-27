@@ -1,0 +1,12 @@
+--- /dev/null
++++ b/KernelInterface/Makefile
+@@ -0,0 +1,8 @@
++
++all: libjavanns.so
++
++libjavanns.so: javanns_KernelInterface.o
++	$(CC) -shared -fPIC -DPIC javanns_KernelInterface.o -O2 -lsnnskernel -lsnnsfunc $(LDFLAGS) -Wl,-soname -Wl,libjavanns.so.1 -o libjavanns.so
++
++javanns_KernelInterface.o: javanns_KernelInterface.c javanns_KernelInterface.h
++	$(CC) -fPIC -I/usr/lib/jvm/java-6-openjdk-amd64/include -I/usr/include/snns -c $(CFLAGS) $(CPPFLAGS) -o javanns_KernelInterface.o javanns_KernelInterface.c
++

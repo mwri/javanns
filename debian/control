@@ -1,0 +1,33 @@
+Source: javanns
+Section: science
+Priority: extra
+Maintainer: Michael Wright <mjw@bloop.methodanalysis.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://www.ra.cs.uni-tuebingen.de/software/JavaNNS/
+
+Package: libjavanns
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libsnns (>= 4.3)
+Description: Java Neural Network Simulator (library)
+ JavaNNS (Java Neural Network Simulator) library (SNNS bindings for Java).
+ .
+ JavaNNS is the successor of SNNS. It is based on its computing kernel, with
+ a newly developed, comfortable graphical user interface written in Java set
+ on top of it. Hence the compatibility with SNNS is achieved, while the
+ platform-independence is increased. 
+
+Package: javanns
+Section: science
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libjavanns (= ${binary:Version})
+Description: Java Neural Network Simulator (java app)
+ JavaNNS (Java Neural Network Simulator) Java GUI.
+ .
+ JavaNNS is the successor of SNNS. It is based on its computing kernel, with
+ a newly developed, comfortable graphical user interface written in Java set
+ on top of it. Hence the compatibility with SNNS is achieved, while the
+ platform-independence is increased. 

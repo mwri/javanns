@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+export CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2
+export LDFLAGS=-Wl,-z,relro
+
+
+build:
+	(cd KernelInterface; make)
+	dh $@ --with javahelper
+
+clean:
+	rm -f dist/JavaNNS.jar
+	rm -f KernelInterface/javanns_KernelInterface.o
+	rm -f KernelInterface/libjavanns.so
+	dh $@ --with javahelper
+
+override_dh_auto_install:
+	cp dist/JavaNNS.jar debian/javanns/usr/bin/X11/javanns
+	cp KernelInterface/libjavanns.so debian/libjavanns/usr/lib/libjavanns.so.1.1
+	(cd debian/libjavanns/usr/lib; ln -s libjavanns.so.1.1 libjavanns.so.1)
+	(cd debian/libjavanns/usr/lib; ln -s libjavanns.so.1 libjavanns.so)
+
+%:
+	dh $@ --with javahelper
